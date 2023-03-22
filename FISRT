@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chocolate Management Company</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Add New Candy</h1>
+		<form class="form-inline" id="candy-form">
+			<div class="form-group">
+				<label for="candy-name">Candy Name:</label>
+				<input type="text" class="form-control" id="candy-name" name="candy-name">
+			</div>
+
+			<div class="form-group">
+				<label for="description">Description:</label>
+				<textarea class="form-control" id="description" name="description"></textarea>
+			</div>
+
+			<div class="form-group">
+				<label for="price">Price:</label>
+				<input type="number" class="form-control" id="price" name="price">
+			</div>
+
+			<div class="form-group">
+				<label for="quantity">Quantity:</label>
+				<div class="input-group">
+					<input type="number" class="form-control" id="quantity" name="quantity">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default" id="decrement-1">-1</button>
+						<button type="button" class="btn btn-default" id="decrement-2">-2</button>
+					</div>
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-primary" name="add-title" style="margin-left: 10px;">Add Candy</button>
+		</form>
+		<hr>
+		<h2>Added Candies</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Candy Name</th>
+					<th>Description</th>
+					<th>Price</th>
+					<th>Quantity</th>
+				</tr>
+			</thead>
+			<tbody id="candy-list">
+			</tbody>
+		</table>
+	</div>
+
+	<!-- Axios Library -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!-- jQuery Library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Bootstrap JS -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+	<script>
+		// Display added candy
+		function displayCandy(candy) {
+			var candyRow = $("<tr>");
+			candyRow.append($("<td>").text(candy.candyName));
+			candyRow.append($("<td>").text(candy.description));
+			candyRow.append($("<td>").text(candy.price));
+			candyRow.append($("<td>").text(candy.quantity));
+			$("#candy-list").append(candyRow);
+		}
+
+		// Fetch candies from the CRUD API and display them
+		axios.get("https://crudcrud.com/api/0a748cab97c34d2fb3e59ec6cd474aa6/candies")
+			.then(function(response) {
+				var candies = response.data;
+				candies.forEach
